@@ -20,6 +20,7 @@ GrammarChecker will be a bean, which depends on something like 'SpellChecker'.
 EnglishSpellChecker and SpanishSpellChecker are the two possible candidates to be injected. One must be selected, or another, but NOT both (there would be dependency resolution conflict). For now, have EnglishSpellChecker used. 
 
 ![Capture1](https://user-images.githubusercontent.com/43153078/73947218-1ec1dc80-48c5-11ea-89c3-74be61cac403.PNG)
+![Capture2](https://user-images.githubusercontent.com/43153078/73947358-4ca72100-48c5-11ea-87e4-d29eba9c2090.PNG)
 
 4. Make a test program, where an instance of GrammarChecker is created by Spring, and use it
 
