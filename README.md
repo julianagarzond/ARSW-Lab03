@@ -1,6 +1,14 @@
 # ARSW-Lab03
 
-
+## Members
+  - Juliana Garzón Duque
+  - Eduardo Ocampo Arellano 
+  
+## Compile
+  - mvn pacakage
+  
+## Run
+  - mvn compile
 
 
 
