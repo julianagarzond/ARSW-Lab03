@@ -73,6 +73,7 @@ BlueprintsPersistence class
     }
   
   ```
+  TEST methods
   ``` java
    @Test
     public void getBlueprintTest(){
@@ -92,6 +93,8 @@ BlueprintsPersistence class
         }
         assertEquals(resultBp,bp);
     }
+    
+   
 
     @Test
     public void getBlueprintByAuthorTest(){
