@@ -36,6 +36,26 @@ EnglishSpellChecker and SpanishSpellChecker are the two possible candidates to b
 Configure the application to work under a dependency injection scheme, as shown in the previous diagram.
 The above requires:
 1. Add the dependencies of Spring. Add the Spring settings. Configure the application - by means of annotations - so that the persistence scheme is injected when the BlueprintServices bean is created. Complete the getBluePrint() and getBlueprintsByAuthor() operations. Implement everything required from the lower layers (for now, the available persistence scheme InMemoryBlueprintPersistence) by adding the corresponding tests in InMemoryPersistenceTest.
+
+InMemoryBlueprintPersistence class 
+  ``` java
+  @Override
+    public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException {
+        return blueprints.get(new Tuple<>(author, bprintname));
+    }
+  
+```
+BlueprintsPersistence class 
+ ``` java
+  public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
+        return bpp.getBlueprint(author, name);
+    }
+    
+  ```
+    
+ 
+
+
 2. Make a program in which you create (through Spring) an instance of BlueprintServices, and rectify its functionality: register plans, consult plans, register specific plans, etc.
 3. You want the plan query operations to perform a filtering process, before returning the planes consulted. These filters are looking to reduce the size of the plans, removing redundant data or simply sub-sampling, before returning them. Adjust the application (adding the abstractions and implementations you consider) so that the BlueprintServices class is injected with one of two possible 'filters' (or possible future filters). The use of more than one at a time is not contemplated:
 
