@@ -67,7 +67,59 @@ BlueprintsPersistence class
     
   ```
   BlueprintsPersistence class
+   ``` java
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
+        return bpp.getBlueprintByAuthor(author);
+    }
   
+  ```
+  TEST methods
+  ``` java
+   @Test
+    public void getBlueprintTest(){
+        InMemoryBlueprintPersistence ibpp = new InMemoryBlueprintPersistence();
+        Point[] pts = new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp = new Blueprint("john", "theRipper",pts);
+        try {
+            ibpp.saveBlueprint(bp);
+        } catch (BlueprintPersistenceException e) {
+            fail("InMemoryBluePrintsPersistence save error.");
+        }
+        Blueprint resultBp=null;
+        try {
+            resultBp = ibpp.getBlueprint("john","theRipper");
+        } catch (BlueprintNotFoundException e) {
+            fail("InMemoryBluePrintsPersistence get error.");
+        }
+        assertEquals(resultBp,bp);
+    }
+    
+   
+
+    @Test
+    public void getBlueprintByAuthorTest(){
+        InMemoryBlueprintPersistence ibpp = new InMemoryBlueprintPersistence();
+        Point[] pts1 = new Point[]{new Point(0, 0),new Point(10, 10)};
+        Blueprint bp1 = new Blueprint("john", "thepaint",pts1);
+        Point[] pts2 = new Point[]{new Point(0, 45),new Point(45, 10)};
+        Blueprint bp2 = new Blueprint("john", "theRipper",pts2);
+        Point[] pts3 = new Point[]{new Point(23, 43),new Point(56, 10)};
+        Blueprint bp3 = new Blueprint("juan", "saltaMuros",pts3);
+        Set<Blueprint> authorBlueprints = new HashSet<>();
+        authorBlueprints.add(bp1);
+        authorBlueprints.add(bp2);
+
+        try {
+            ibpp.saveBlueprint(bp1);
+            ibpp.saveBlueprint(bp2);
+            ibpp.saveBlueprint(bp3);
+        } catch (BlueprintPersistenceException ex) {
+            fail("InMemoryBluePrintsPersistence save error.");
+        }
+        assertEquals(ibpp.getBlueprintByAuthor("john"),authorBlueprints);
+    }
+}
+```
   
     
     
