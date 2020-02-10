@@ -52,6 +52,24 @@ BlueprintsPersistence class
     }
     
   ```
+  
+  InMemoryBlueprintPersistence class 
+  ``` java
+   public Set<Blueprint> getBlueprintByAuthor(String auth) {
+        Set<Blueprint> authorBlueprints = new HashSet<>();
+        for (Tuple<String, String> key : blueprints.keySet()) {
+            if (key.getElem1().equals(auth)) {
+                authorBlueprints.add(blueprints.get(key));
+            }
+        }
+        return authorBlueprints;
+    }
+    
+  ```
+  BlueprintsPersistence class
+  
+  
+    
     
  
 
