@@ -31,6 +31,8 @@ EnglishSpellChecker and SpanishSpellChecker are the two possible candidates to b
 ### Blueprint Management 1
 ## Part 1
 
+![assets_-LWJN2LirJZqzEmpZ3Gn_-LmoBwcRZgykpBDUEYdn_-LmoD5BKRb7fFj_aqsS1_BluePrint (1)](https://user-images.githubusercontent.com/43153078/74153438-9f8f1a00-4bde-11ea-95ef-1e1f9a7b0c56.png) 
+
 
 
 
