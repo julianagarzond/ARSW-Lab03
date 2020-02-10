@@ -51,7 +51,14 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     @Override
     public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException {
-        return blueprints.get(new Tuple<>(author, bprintname));
+        Blueprint bp = null;
+        try {
+            bp = blueprints.get(new Tuple<>(author, bprintname));
+
+        } catch (Exception ex) {
+            throw new BlueprintNotFoundException("The given author and blue print name does not exists");
+        }
+        return filter.filterBlueprint(bp);
     }
 
     public Set<Blueprint> getBlueprintByAuthor(String auth) {
@@ -61,7 +68,7 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
                 authorBlueprints.add(blueprints.get(key));
             }
         }
-        return authorBlueprints;
+        return filter.filterBlueprintSet(authorBlueprints);
     }
 
     @Override
@@ -70,7 +77,7 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         for (Tuple<String, String> key : blueprints.keySet()) {
             authorBlueprints.add(blueprints.get(key));
         }
-        return authorBlueprints;
+        return filter.filterBlueprintSet(authorBlueprints);
     }
 
     @Override
@@ -81,6 +88,11 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         } else {
             throw new BlueprintPersistenceException("The given blueprint does not exists: " + bp);
         }
+    }
+
+    public void setFilter(BlueprintFilter filter) {
+
+        this.filter = filter;
     }
 
 
