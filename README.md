@@ -127,6 +127,37 @@ BlueprintsPersistence class
 
 
 2. Make a program in which you create (through Spring) an instance of BlueprintServices, and rectify its functionality: register plans, consult plans, register specific plans, etc.
+
+Update plans 
+
+ ``` java
+@Override
+    public void updateBlueprint(Blueprint bp, String auth, String name) throws BlueprintPersistenceException {
+        if (blueprints.containsKey(new Tuple<>(bp.getAuthor(), bp.getName()))) {
+            blueprints.remove(new Tuple<>(auth, name));
+            blueprints.put(new Tuple<>(auth, name), bp);
+        } else {
+            throw new BlueprintPersistenceException("The given blueprint does not exists: " + bp);
+        }
+    }
+ ```
+ ``` java
+ public void updateBlueprint(Blueprint bp, String auth,String name) throws BlueprintPersistenceException {
+        bpp.updateBlueprint(bp,auth,name);
+    }
+ ```
+ Register plans 
+  ``` java
+    public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException {
+        bpp.saveBlueprint(bp);
+    }
+  ```
+   ``` java
+   public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException {
+        bpp.saveBlueprint(bp);
+    }
+     ```
+ 
 3. You want the plan query operations to perform a filtering process, before returning the planes consulted. These filters are looking to reduce the size of the plans, removing redundant data or simply sub-sampling, before returning them. Adjust the application (adding the abstractions and implementations you consider) so that the BlueprintServices class is injected with one of two possible 'filters' (or possible future filters). The use of more than one at a time is not contemplated:
 
   3.1.  (A) Redundancy filtering: deletes consecutive points from the plane that are repeated.
