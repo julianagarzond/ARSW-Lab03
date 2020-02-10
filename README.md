@@ -67,6 +67,11 @@ BlueprintsPersistence class
     
   ```
   BlueprintsPersistence class
+   ``` java
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
+        return bpp.getBlueprintByAuthor(author);
+    }
+     ```
   
   
     
