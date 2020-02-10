@@ -10,16 +10,25 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
  * @author hcadavid
  */
+@Service
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
+
+    //@Autowired
+    //private BlueprintFilter filter;
 
     public InMemoryBlueprintPersistence() {
         //load stub data
@@ -44,6 +53,15 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return blueprints.get(new Tuple<>(author, bprintname));
     }
 
-    
-    
+    public Set<Blueprint> getBlueprintByAuthor(String auth) {
+        Set<Blueprint> authorBlueprints = new HashSet<>();
+        for (Tuple<String, String> key : blueprints.keySet()) {
+            if (key.getElem1().equals(auth)) {
+                authorBlueprints.add(blueprints.get(key));
+            }
+        }
+        return authorBlueprints;
+    }
+
+
 }
