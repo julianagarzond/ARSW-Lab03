@@ -25,17 +25,28 @@ import java.util.Set;
  */
 
 @Service
+
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
 
     @Autowired
+
     private BlueprintFilter filter;
 
     public InMemoryBlueprintPersistence() {
         //load stub data
         Point[] pts = new Point[]{new Point(140, 140),new Point(115, 115)};
-        Blueprint bp = new Blueprint("_authorname_", "_bpname_ ",pts);
+        Blueprint bp = new Blueprint("Pep", "grillo",pts);
+        blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
+        Point[] pts1 = new Point[]{new Point(140, 140),new Point(115, 115)};
+        Blueprint bp1 = new Blueprint("Pep", "Guardiola",pts);
+        blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
+        Point[] pts2 = new Point[]{new Point(140, 140),new Point(115, 115)};
+        Blueprint bp2 = new Blueprint("Gerard", "Acso",pts);
+        blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
+        Point[] pts3 = new Point[]{new Point(140, 140),new Point(115, 115)};
+        Blueprint bp3 = new Blueprint("Yisus", "Craist",pts);
         blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
     }    
     
